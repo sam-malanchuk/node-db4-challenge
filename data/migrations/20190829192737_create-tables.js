@@ -32,6 +32,7 @@ exports.up = function(knex) {
           .notNullable()
           .references('id')
           .inTable('ingredients');
+        tbl.integer('quantity').notNullable();
         tbl.primary(['recipe_id', 'ingredients_id']);
     })
 };
