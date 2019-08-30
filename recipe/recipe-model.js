@@ -20,5 +20,5 @@ function getShoppingList(recipe_id) {
 }
 
 function getInstructions(recipe_id) {
-    
+    return db('steps').where({recipe_id}).orderBy('step_number', 'asc');
 }
