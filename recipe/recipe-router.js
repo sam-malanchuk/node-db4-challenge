@@ -19,8 +19,11 @@ router.get('/:id/shoppingList', (req, res) => {
 
   Recipes.getShoppingList(id)
     .then(recipe => {
-        console.log(recipe);
-        res.status(200).json(recipe);
+        if(recipe.length > 0) {
+            res.status(200).json(recipe);
+        } else {
+            res.status(400).json({ message: 'The recipe ID could not be found' });
+        }
     })
     .catch(err => {
         res.status(500).json({ message: 'There was an error getting the recipe', error: err });
@@ -32,7 +35,11 @@ router.get('/:id/instructions', (req, res) => {
 
   Recipes.getInstructions(id)
   .then(steps => {
-    res.status(200).json(steps);
+    if(steps.length > 0) {
+        res.status(200).json(steps);
+    } else {
+        res.status(400).json({ message: 'The recipe ID could not be found' });
+    }
   })
   .catch(err => {
       res.status(500).json({ message: 'There was an error getting the instructions', error: err });
